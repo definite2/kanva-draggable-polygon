@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState,useEffect } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import PolygonAnnotation from "components/PolygonAnnotation";
 import { Stage, Layer, Image } from "react-konva";
 const videoSource = "./sampleImage.jpg";
@@ -6,7 +6,6 @@ const Canvas = () => {
   const [image, setImage] = useState();
   const imageRef = useRef(null);
   const [points, setPoints] = useState([]);
-  const [drawing, setDrawing] = useState(false);
   const [size, setSize] = useState({});
   const [flattenedPoints, setFlattenedPoints] = useState();
   const [position, setPosition] = useState([0, 0]);
@@ -39,7 +38,6 @@ const Canvas = () => {
   //drawing begins when mousedown event fires.
   const handleMouseDown = (e) => {
     if (isPolyComplete) return;
-    setDrawing(true);
     const stage = e.target.getStage();
     const mousePos = getMousePos(stage);
     if (isMouseOverPoint && points.length >= 3) {
@@ -49,7 +47,6 @@ const Canvas = () => {
     }
   };
   const handleMouseMove = (e) => {
-    if (!drawing) return;
     const stage = e.target.getStage();
     const mousePos = getMousePos(stage);
     setPosition(mousePos);
@@ -73,9 +70,7 @@ const Canvas = () => {
     if (pos[1] > stage.height()) pos[1] = stage.height();
     setPoints([...points.slice(0, index), pos, ...points.slice(index + 1)]);
   };
-  const handleMouseUp=(e)=>{
-    setDrawing(false);
-  }
+
   useEffect(() => {
     setFlattenedPoints(
       points
@@ -102,16 +97,28 @@ const Canvas = () => {
   };
 
   return (
-    <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Stage
         width={size.width || 480}
         height={size.height || 360}
         onMouseMove={handleMouseMove}
         onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
       >
         <Layer>
-          <Image ref={imageRef} image={image} x={0} y={0} width={size.width} height={size.height} />
+          <Image
+            ref={imageRef}
+            image={image}
+            x={0}
+            y={0}
+            width={size.width}
+            height={size.height}
+          />
           <PolygonAnnotation
             points={points}
             flattenedPoints={flattenedPoints}

@@ -32,6 +32,7 @@ const PolygonAnnotation = (props) => {
   const [minMaxX, setMinMaxX] = useState([0, 0]); //min and max in x axis
   const [minMaxY, setMinMaxY] = useState([0, 0]); //min and max in y axis
   const handleGroupDragStart = (e) => {
+
     let arrX = points.map((p) => p[0]);
     let arrY = points.map((p) => p[1]);
     setMinMaxX(minMax(arrX));
@@ -44,7 +45,7 @@ const PolygonAnnotation = (props) => {
     if (minMaxY[0] + y < 0) y = -1 * minMaxY[0];
     if (minMaxX[0] + x < 0) x = -1 * minMaxX[0];
     if (minMaxY[1] + y > sh) y = sh - minMaxY[1];
-    if (minMaxX[1] + x > sw) y = sw - minMaxX[1];
+    if (minMaxX[1] + x > sw) x = sw - minMaxX[1];
     return { x, y };
   };
   return (
