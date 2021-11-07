@@ -13,14 +13,12 @@ const PolygonAnnotation = (props) => {
     points,
     flattenedPoints,
     isFinished,
-    lineX,
-    lineY,
     handlePointDragMove,
     handleGroupDragEnd,
     handleMouseOverStartPoint,
     handleMouseOutStartPoint,
   } = props;
-  const vertexRadius = 5;
+  const vertexRadius = 6;
 
   const [stage, setStage] = useState();
   const handleGroupMouseOver = (e) => {
@@ -39,7 +37,7 @@ const PolygonAnnotation = (props) => {
     setMinMaxX(minMax(arrX));
     setMinMaxY(minMax(arrY));
   };
-  const groupDragBound = () => {
+  const groupDragBound = (pos) => {
     let { x, y } = pos;
     const sw = stage.width();
     const sh = stage.height();
@@ -64,7 +62,7 @@ const PolygonAnnotation = (props) => {
         stroke="red"
         strokeWidth={3}
         closed={isFinished}
-        fill="green"
+        fill="rgb(0,128,0,0.5)"
       />
       {points.map((point, index) => {
         const x = point[0] - vertexRadius / 2;
