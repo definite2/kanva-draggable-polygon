@@ -5,6 +5,7 @@ const videoSource = "./sampleImage.jpg";
 const Canvas = () => {
   const [image, setImage] = useState();
   const imageRef = useRef(null);
+  const dataRef = useRef(null);
   const [points, setPoints] = useState([]);
   const [size, setSize] = useState({});
   const [flattenedPoints, setFlattenedPoints] = useState();
@@ -81,6 +82,11 @@ const Canvas = () => {
   const undo = () => {
     setPoints(points.slice(0, -1));
     setPolyComplete(false);
+    setPosition(points[points.length-1])
+  };
+  const reset = () => {
+    setPoints([]);
+    setPolyComplete(false);
   };
   const handleGroupDragEnd = (e) => {
     //drag end listens other children circles' drag end event
@@ -101,7 +107,9 @@ const Canvas = () => {
       style={{
         display: "flex",
         justifyContent: "center",
+        flexDirection: "column",
         alignItems: "center",
+        marginTop: 20,
       }}
     >
       <Stage
@@ -130,6 +138,32 @@ const Canvas = () => {
           />
         </Layer>
       </Stage>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 20,
+        }}
+      >
+        <button style={{ margin: 8 }} onClick={undo}>
+          Undo
+        </button>
+        <button style={{ margin: 8 }} onClick={reset}>
+          Reset
+        </button>
+      </div>
+      <div
+        ref={dataRef}
+        style={{
+          width: 375,
+          height: 400,
+          boxShadow: ".5px .5px 5px .4em rgba(0,0,0,.1)",
+          marginTop: 20,
+        }}
+      >
+        <pre style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(points)}</pre>
+      </div>
     </div>
   );
 };
