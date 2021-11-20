@@ -8,4 +8,4 @@ Read How to Create Image Annotation Tool With React-Konva blog from [here](https
 
 ## Live Demo
 
-See live [demo](https://6150a5115be275a3cd64970a--sticky-with-hook.netlify.app)
+See live [demo]()
