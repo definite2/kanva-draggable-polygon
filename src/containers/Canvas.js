@@ -18,7 +18,8 @@ const Canvas = () => {
     element.height = 360;
     element.src = videoSource;
     return element;
-  }, [videoSource]); //it may come from redux
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoSource]); //it may come from redux so it may be dependency that's why I left it as dependecny...
   useEffect(() => {
     const onload = function () {
       setSize({
@@ -78,11 +79,11 @@ const Canvas = () => {
         .concat(isPolyComplete ? [] : position)
         .reduce((a, b) => a.concat(b), [])
     );
-  }, [points]);
+  }, [points, isPolyComplete, position]);
   const undo = () => {
     setPoints(points.slice(0, -1));
     setPolyComplete(false);
-    setPosition(points[points.length-1])
+    setPosition(points[points.length - 1]);
   };
   const reset = () => {
     setPoints([]);

@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Canvas from "containers/Canvas";
 function App() {
