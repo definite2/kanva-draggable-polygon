@@ -1,7 +1,22 @@
 import React, { useMemo, useRef, useState, useEffect } from "react";
 import PolygonAnnotation from "components/PolygonAnnotation";
 import { Stage, Layer, Image } from "react-konva";
-const videoSource = "./sampleImage.jpg";
+import Button from "components/Button";
+const videoSource = "./space_landscape.jpg";
+const wrapperStyle = {
+  display: "flex",
+  justifyContent: "center",
+  marginTop: 20,
+  backgroundColor: "aliceblue",
+};
+const columnStyle = {
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  alignItems: "center",
+  marginTop: 20,
+  backgroundColor: "aliceblue",
+};
 const Canvas = () => {
   const [image, setImage] = useState();
   const imageRef = useRef(null);
@@ -14,8 +29,8 @@ const Canvas = () => {
   const [isPolyComplete, setPolyComplete] = useState(false);
   const videoElement = useMemo(() => {
     const element = new window.Image();
-    element.width = 480;
-    element.height = 360;
+    element.width = 650;
+    element.height = 302;
     element.src = videoSource;
     return element;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -104,61 +119,50 @@ const Canvas = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        alignItems: "center",
-        marginTop: 20,
-      }}
-    >
-      <Stage
-        width={size.width || 480}
-        height={size.height || 360}
-        onMouseMove={handleMouseMove}
-        onMouseDown={handleMouseDown}
-      >
-        <Layer>
-          <Image
-            ref={imageRef}
-            image={image}
-            x={0}
-            y={0}
-            width={size.width}
-            height={size.height}
-          />
-          <PolygonAnnotation
-            points={points}
-            flattenedPoints={flattenedPoints}
-            handlePointDragMove={handlePointDragMove}
-            handleGroupDragEnd={handleGroupDragEnd}
-            handleMouseOverStartPoint={handleMouseOverStartPoint}
-            handleMouseOutStartPoint={handleMouseOutStartPoint}
-            isFinished={isPolyComplete}
-          />
-        </Layer>
-      </Stage>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: 20,
-        }}
-      >
-        <button style={{ margin: 8 }} onClick={undo}>
-          Undo
-        </button>
-        <button style={{ margin: 8 }} onClick={reset}>
-          Reset
-        </button>
+    <div style={wrapperStyle}>
+      <div style={columnStyle}>
+        <Stage
+          width={size.width || 650}
+          height={size.height || 302}
+          onMouseMove={handleMouseMove}
+          onMouseDown={handleMouseDown}
+        >
+          <Layer>
+            <Image
+              ref={imageRef}
+              image={image}
+              x={0}
+              y={0}
+              width={size.width}
+              height={size.height}
+            />
+            <PolygonAnnotation
+              points={points}
+              flattenedPoints={flattenedPoints}
+              handlePointDragMove={handlePointDragMove}
+              handleGroupDragEnd={handleGroupDragEnd}
+              handleMouseOverStartPoint={handleMouseOverStartPoint}
+              handleMouseOutStartPoint={handleMouseOutStartPoint}
+              isFinished={isPolyComplete}
+            />
+          </Layer>
+        </Stage>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Button name="Undo" onClick={undo} />
+          <Button name="Reset" onClick={reset} />
+        </div>
       </div>
       <div
         ref={dataRef}
         style={{
           width: 375,
-          height: 400,
+          height: 302,
           boxShadow: ".5px .5px 5px .4em rgba(0,0,0,.1)",
           marginTop: 20,
         }}

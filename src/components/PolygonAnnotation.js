@@ -32,7 +32,6 @@ const PolygonAnnotation = (props) => {
   const [minMaxX, setMinMaxX] = useState([0, 0]); //min and max in x axis
   const [minMaxY, setMinMaxY] = useState([0, 0]); //min and max in y axis
   const handleGroupDragStart = (e) => {
-
     let arrX = points.map((p) => p[0]);
     let arrY = points.map((p) => p[1]);
     setMinMaxX(minMax(arrX));
@@ -60,10 +59,10 @@ const PolygonAnnotation = (props) => {
     >
       <Line
         points={flattenedPoints}
-        stroke="red"
+        stroke="#00F1FF"
         strokeWidth={3}
         closed={isFinished}
-        fill="rgb(0,128,0,0.5)"
+        fill="rgb(140,30,255,0.5)"
       />
       {points.map((point, index) => {
         const x = point[0] - vertexRadius / 2;
@@ -82,8 +81,8 @@ const PolygonAnnotation = (props) => {
             x={x}
             y={y}
             radius={vertexRadius}
-            fill="white"
-            stroke="black"
+            fill="#FF019A"
+            stroke="#00F1FF"
             strokeWidth={2}
             draggable
             onDragMove={handlePointDragMove}
