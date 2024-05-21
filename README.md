@@ -1,6 +1,8 @@
 # Polygon Image Annotation Tool
 
-Draggable user draw polygon shaped annotation with react-konva. The annotation coordiantes are restricted to  only canvas area.
+Draggable user draw polygon shaped annotation with react-konva. The annotation coordiantes are restricted to  only canvas area. 
+
+You can create your own drawing tool as using [polygon-annotation](https://github.com/definite2/polygon-annotation) npm package!
 
 ## Blog About Project
 
